@@ -1,0 +1,48 @@
+with open('text.txt','r',encoding='UTF-8') as file:
+  text = file.read()
+  print(text)
+  print('-'*40)
+  
+  #-----------------------
+  text = text.strip()
+  print(text)
+  print('-'*40)
+  
+  #-----------------------
+  for k in '.,;:()!?':
+   text = text.replace(k,'')
+  print(text)
+  print('-'*40)
+  
+  #-----------------------
+  words = text.split(' ')
+  print(words)
+  print('-'*40)
+  
+  #-----------------------
+  counter = dict()
+  
+  stops=['a','as','is','and','for','in','to','of']
+  for k in words:
+    m=k.lower()
+    if m not in stops :
+      if m in counter :
+       counter[m] = counter[m] + 1
+      else:
+       counter[m] = 1
+  
+  print(counter)
+  print('-'*40)
+  
+  #-----------------------
+  for k in counter :
+    if counter[k] >=3 :
+      print(k,counter[k])
+  print('-'*40)
+    
+  #-----------------------
+    
+    
+    
+    
+    
