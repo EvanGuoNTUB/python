@@ -40,7 +40,54 @@ with open('text.txt','r',encoding='UTF-8') as file:
       print(k,counter[k])
   print('-'*40)
     
+  #-------------------------------------------------------------------------------------
+    
+    
+    
+    #import collections
+#import collections as co
+from collections import Counter
+
+
+with open('text.txt','r',encoding='UTF-8') as file:
+  text = file.read()
+  print(text)
+  print('-'*40)
+  
   #-----------------------
+  text = text.strip()
+  print(text)
+  print('-'*40)
+  
+  #-----------------------
+  for k in '.,;:()!?':
+   text = text.replace(k,'')
+  print(text)
+  print('-'*40)
+  
+  #-----------------------
+  words = text.split(' ')
+  print(words)
+  print('-'*40)
+  
+  #-----------------------
+  
+  
+  stops=['a','as','is','and','for','in','to','of']
+  #counter=collections.Counter()
+  #counter=co.Counter()
+  counter=Counter()
+  for k in words:
+    m=k.lower()
+    if m not in stops :
+      counter[m]  += 1
+  print(counter.most_common(10))
+  
+  print('-'*40)
+  #-----------------------
+  
+  #-----------------------
+    
     
     
     
