@@ -1,0 +1,77 @@
+#-------------------------------------------------
+import jieba
+
+
+#-------------------------------------------------
+filePos = open('../corpus/positive.txt','r',encoding='UTF-8')
+textPos = filePos.read()
+wordsPos = textPos.split('\n')
+for k in wordsPos:
+    print(k)
+
+#-------------------------------------------------
+fileNeg = open('../corpus/negative.txt','r',encoding='UTF-8')
+textNeg = fileNeg.read()
+wordsNeg = textNeg.split('\n')
+for k in wordsNeg:
+    print(k)
+
+#-------------------------------------------------
+with open('../corpus/cvat1.csv','r',encoding='UTF-8') as file:
+
+    for  text in file.readlines():
+        data = text.split(',')
+
+        sentence = data[1]
+        human = data[3]
+
+
+
+        words = jieba.cut(sentence)
+
+        pw = []
+        nw = []
+
+        for word in words:
+
+
+            if word in wordsPos:
+                pw.append(word)
+            if word in wordsNeg:
+                nw.append(word)
+
+        npw = len(pw)
+        nnw = len(nw)
+
+        print('-'*50)
+        print(sentence)
+
+
+
+
+        if npw>nnw  :
+            print('robot:',npw/(npw+nnw))
+
+            print('正向')
+        elif npw<nnw:
+            print('robot:',npw/(npw+nnw))
+
+            print('負向')
+        else:
+            print('robot:',0.5)
+
+            print('正常')
+
+
+        if  data[3] >5  :
+
+            print('human:',human)
+            print('正向')
+        elif data[3]<5:
+
+            print('human:',human)
+            print('負向')
+        else:
+            print('human:',human)
+            print('正常')
+#-------------------------------------------------
