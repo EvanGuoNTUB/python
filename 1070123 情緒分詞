@@ -1,0 +1,62 @@
+import jieba
+'''''''''''''''''''''''''''''''''''''''
+            讀入停用詞檔
+'''''''''''''''''''''''''''''''''''''''
+stopWords = []
+with open('stopWords.txt', 'r', encoding='UTF-8') as file:
+    for data in file.readlines():
+        data = data.strip()
+        stopWords.append(data)
+
+'''''''''''''''''''''''''''''''''''''''
+            讀入文字檔
+'''''''''''''''''''''''''''''''''''''''
+with open('data.txt', 'r', encoding='UTF-8') as file:
+    text = file.read()
+    words = jieba.cut(text)
+
+'''''''''''''''''''''''''''''''''''''''
+            移除停用詞及輸出
+'''''''''''''''''''''''''''''''''''''''
+result = []
+
+for k in words:
+    if k not in stopWords:
+        result.append(k)
+
+print(result)
+
+'''''''''''''''''''''''''''''''''''''''
+            讀入正負面用詞檔
+'''''''''''''''''''''''''''''''''''''''
+pos = []
+with open('positives.txt', 'r', encoding='UTF-8') as file:
+    for data in file.readlines():
+        data = data.strip()
+        pos.append(data)
+
+neg = []
+with open('negatives.txt', 'r', encoding='UTF-8') as file:
+    for data in file.readlines():
+        data = data.strip()
+        neg.append(data)
+
+'''''''''''''''''''''''''''''''''''''''
+            輸出結果
+'''''''''''''''''''''''''''''''''''''''
+
+posW = []
+for k in result:
+    if k in pos:
+        posW.append(k)
+print(posW)
+
+negW = []
+for k in result:
+    if k in neg:
+        negW.append(k)
+print(negW)
+
+print("正向詞數:", len(posW))
+print("負向詞數:", len(negW))
+print("全部詞數:", len(result))
