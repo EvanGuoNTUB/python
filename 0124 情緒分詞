@@ -1,0 +1,51 @@
+import jieba
+
+posWord = set()
+negWord = set()
+posSeg = []
+negSeg = []
+'''''''''''''''''''''''''''''''''''''''
+            讀入正負面用詞檔
+'''''''''''''''''''''''''''''''''''''''
+with open('positives.txt', 'r', encoding='UTF-8') as file:
+    for data in file.readlines():
+        data = data.strip()
+        posWord.add(data)
+
+with open('negatives.txt', 'r', encoding='UTF-8') as file:
+    for data in file.readlines():
+        data = data.strip()
+        negWord.add(data)
+
+'''''''''''''''''''''''''''''''''''''''
+            讀入文字檔
+'''''''''''''''''''''''''''''''''''''''
+with open('data.txt', 'r', encoding='UTF-8') as file:
+    data = file.read()
+    s = jieba.cut(data)
+    for k in s:
+        if k in posWord:
+            posSeg.append(k)
+        if k in negWord:
+            negSeg.append(k)
+
+'''''''''''''''''''''''''''''''''''''''
+            輸出結果
+'''''''''''''''''''''''''''''''''''''''
+print(posWord)
+print(len(posWord))
+print(negWord)
+print(len(negWord))
+
+print(posSeg)
+print("正向詞數:",len(posSeg))
+print(negSeg)
+print("負向詞數:",len(negSeg))
+
+if len(posSeg)>len(negSeg):
+    print('POSITIVE!')
+else:
+    print('NEGATIVE!')
+
+
+
