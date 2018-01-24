@@ -1,0 +1,17 @@
+import myLexi
+
+'''''''''''''''''''''''''''''''''''''''
+            讀入文字檔
+'''''''''''''''''''''''''''''''''''''''
+with open('data.txt', 'r', encoding='UTF-8') as file:
+    data = file.read()
+
+'''''''''''''''''''''''''''''''''''''''
+            輸出結果
+'''''''''''''''''''''''''''''''''''''''
+result,rs,ns,rsl,nsl =myLexi.senti(data)
+print(result)
+print(rs)
+print(rsl)
+print(ns)
+print(nsl)
