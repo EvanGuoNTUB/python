@@ -1,0 +1,34 @@
+import numpy as np
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.svm import SVC
+
+
+data=np.genfromtxt('data.csv',  delimiter=',')
+
+np.random.shuffle(data)
+
+features=[0,1,2,3,4,5,6,7,8]
+n=1000
+label=9
+
+training = data[:n]
+testing = data[n:]
+
+#knn = KNeighborsClassifier(n_neighbors=10)
+#knn.fit(training[:,features], training[:,label])
+svm = SVC()
+svm.fit(training[:,features], training[:,label])
+
+#predicted = knn.predict(testing[:,features])
+predicted = svm.predict(testing[:,features])
+print(predicted)
+
+excepted=testing[:,label]
+print(excepted)
+
+result=(predicted==excepted)
+print(result)
+
+cnt=np.sum(result)
+print(cnt)
+print(cnt/len(testing))
